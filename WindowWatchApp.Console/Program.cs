@@ -1,6 +1,7 @@
 ﻿namespace WindowWatchApp.Console;
 
 using System;
+using WindowWatchApp.Common;
 using WindowWatchApp.Common.Windows;
 
 public static class Program

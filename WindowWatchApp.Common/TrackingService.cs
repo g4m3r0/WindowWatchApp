@@ -1,4 +1,4 @@
-﻿namespace WindowWatchApp.Console
+﻿namespace WindowWatchApp.Common
 {
     using System;
     using System.Collections.Generic;
