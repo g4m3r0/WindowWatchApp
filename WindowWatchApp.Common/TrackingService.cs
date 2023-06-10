@@ -2,13 +2,17 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.ComponentModel;
+    using System.Runtime.CompilerServices;
     using System.Timers;
     using WindowWatchApp.Common;
+    using WindowWatchApp.Common.Models;
 
     /// <summary>
     /// Provides a service for tracking user activity based on active application.
     /// </summary>
-    public class TrackingService
+    public class TrackingService : INotifyPropertyChanged
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="TrackingService"/> class.
@@ -21,10 +25,10 @@
             this.ActivityTimeout = activityTimeout;
         }
 
-        /// <summary>
-        /// Gets or sets a dictionary that tracks the time spent per application.
-        /// </summary>
-        public Dictionary<string, TimeSpan> TrackedTime { get; set; } = new();
+        ///// <summary>
+        ///// Gets or sets a collection that tracks the time spent per application.
+        ///// </summary>
+        public ObservableCollection<ApplicationData> TrackedApplications { get; set; } = new();
 
         /// <summary>
         /// Gets or sets the maximum allowed period of user inactivity. If the user is inactive longer than this, the service stops tracking.
@@ -50,6 +54,13 @@
         /// Gets the IActivityTracker implementation that the service uses to track activity.
         /// </summary>
         private IActivityTracker ActivityTracker { get; init; }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
 
         /// <summary>
         /// Starts tracking activity at a specified interval.
@@ -97,14 +108,20 @@
         /// <param name="processName">Name of the process to track.</param>
         private void TrackTime(string processName)
         {
-            if (this.TrackedTime.ContainsKey(processName))
+            var applicationData = this.TrackedApplications.FirstOrDefault(a => a.ProcessName == processName);
+
+            // if the process is not in the collection, add it
+            if (applicationData == null)
             {
-                this.TrackedTime[processName] += this.TrackingInterval;
+                this.TrackedApplications.Add(new ApplicationData { ProcessName = processName, TrackedTime = this.TrackingInterval});
             }
             else
             {
-                this.TrackedTime.Add(processName, this.TrackingInterval);
+                applicationData.TrackedTime += this.TrackingInterval;
             }
+
+            // raise property changed event
+            this.OnPropertyChanged(nameof(this.TrackedApplications));
         }
     }
 }

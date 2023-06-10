@@ -30,9 +30,9 @@ public static class Program
                 Console.Clear();
                 await Console.Out.WriteLineAsync("Tracked Applications:");
 
-                foreach (var trackedApp in trackingService.TrackedTime)
+                foreach (var trackedApp in trackingService.TrackedApplications)
                 {
-                    await Console.Out.WriteLineAsync($"{trackedApp.Key}: {trackedApp.Value.TotalSeconds}s");
+                    await Console.Out.WriteLineAsync($"{trackedApp.ProcessName}: {trackedApp.TrackedTime.TotalSeconds}s");
                 }
             }
         }
