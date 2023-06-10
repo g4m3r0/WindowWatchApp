@@ -3,14 +3,37 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="clr-namespace:WindowWatchApp.Avalonia.ViewModels"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="450"
+			 Width="400" Height="450"
              x:Class="WindowWatchApp.Avalonia.Views.MainView"
              x:DataType="vm:MainViewModel">
-  <Design.DataContext>
-    <!-- This only sets the DataContext for the previewer in an IDE,
+	<Design.DataContext>
+		<!-- This only sets the DataContext for the previewer in an IDE,
          to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
-    <vm:MainViewModel />
-  </Design.DataContext>
+		<vm:MainViewModel />
+	</Design.DataContext>
 
-  <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="auto" />
+			<RowDefinition Height="*" />
+			<RowDefinition Height="auto" />
+		</Grid.RowDefinitions>
+
+		<Border Grid.Row="0" Background="PaleGoldenrod" />
+		<TextBlock Grid.Row="0" Text="{Binding BoldTitle}" Margin="15" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+		<DataGrid Grid.Row="1" AutoGenerateColumns="False" ItemsSource="{Binding TrackingService.TrackedApplications}">
+			<DataGrid.Columns>
+				<DataGridTextColumn Header="Application" Binding="{Binding ProcessName}" />
+				<DataGridTextColumn Header="Time Tracked" Binding="{Binding TrackedTime}" />
+			</DataGrid.Columns>
+		</DataGrid>
+
+		<Border Grid.Row="2" Background="PaleGoldenrod" />
+		<StackPanel Grid.Row="2" Orientation="Horizontal">
+			<Button Content="Start Tracking" Command="{Binding StartTrackingCommand}" />
+		</StackPanel>
+	</Grid>
 </UserControl>
