@@ -26,8 +26,8 @@
 
 		<DataGrid Grid.Row="1" AutoGenerateColumns="False" ItemsSource="{Binding TrackingService.TrackedApplications}">
 			<DataGrid.Columns>
-				<DataGridTextColumn Header="Application" Binding="{Binding ProcessName}" />
-				<DataGridTextColumn Header="Time Tracked" Binding="{Binding TrackedTime}" />
+				<DataGridTextColumn Header="Application" Width="*" Binding="{Binding ProcessName}" />
+				<DataGridTextColumn Header="Time Tracked" Width="auto" Binding="{Binding TrackedTime}" />
 			</DataGrid.Columns>
 		</DataGrid>
 
