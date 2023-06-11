@@ -1,12 +1,19 @@
 ﻿namespace WindowWatchApp.Avalonia.ViewModels;
 
+using global::Avalonia.Controls;
+using global::Avalonia.Data;
+using global::Avalonia.Threading;
 using ReactiveUI;
 using System;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Reactive;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
+using System.Timers;
 using WindowWatchApp.Common;
 using WindowWatchApp.Common.Models;
+using WindowWatchApp.Common.Windows;
 
 public class MainViewModel : ViewModelBase
 {
@@ -20,13 +27,16 @@ public class MainViewModel : ViewModelBase
         this.StartTrackingCommand = ReactiveCommand.CreateFromTask(this.StartTracking);
     }
 
+    public ObservableCollection<ApplicationData> Test { get; set; }
+
     // for design time
     public MainViewModel()
     {
-        Testtt.Add(new ApplicationData() { ProcessName = "Test", TrackedTime = TimeSpan.FromSeconds(10)});
+        var trackingTimeout = TimeSpan.FromMinutes(3);
+        var activityTracker = new WindowsActivityTracker();
+        this.TrackingService = new TrackingService(activityTracker, trackingTimeout);
+        this.TrackingService.TrackedApplications.Add(new ApplicationData() { ProcessName = "Test", TrackedTime = TimeSpan.FromSeconds(10)});
     }
-
-    public ObservableCollection<ApplicationData> Testtt { get; set; } = new();
 
     public string BoldTitle => "WINDOW WATCH APP";
 
