@@ -12,6 +12,7 @@ using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Timers;
 using WindowWatchApp.Common;
+using WindowWatchApp.Common.DataAdapters;
 using WindowWatchApp.Common.Models;
 using WindowWatchApp.Common.Windows;
 
@@ -21,21 +22,33 @@ public class MainViewModel : ViewModelBase
     {
         // If the user is inactive for more than 3 minutes, stop tracking.
         var trackingTimeout = TimeSpan.FromMinutes(3);
-        this.TrackingService = new TrackingService(activityTracker, trackingTimeout);
+
+        var filePath = "./test.json";
+        var dataAdapter = new FileDataAdapter(filePath);
+
+        this.TrackingService = new TrackingService(activityTracker, trackingTimeout, dataAdapter);
+        this.TrackingService.LoadData();
 
         // Setup Commands
         this.StartTrackingCommand = ReactiveCommand.CreateFromTask(this.StartTracking);
     }
 
-    public ObservableCollection<ApplicationData> Test { get; set; }
-
-    // for design time
+    /// <summary>
+    /// Initializes a new instance of the <see cref="MainViewModel"/> class.
+    /// </summary>
     public MainViewModel()
     {
-        var trackingTimeout = TimeSpan.FromMinutes(3);
+        // for design time
         var activityTracker = new WindowsActivityTracker();
-        this.TrackingService = new TrackingService(activityTracker, trackingTimeout);
-        this.TrackingService.TrackedApplications.Add(new ApplicationData() { ProcessName = "Test", TrackedTime = TimeSpan.FromSeconds(10)});
+        var trackingTimeout = TimeSpan.FromMinutes(3);
+
+        var filePath = "./test.json";
+        var dataAdapter = new FileDataAdapter(filePath);
+
+        this.TrackingService = new TrackingService(activityTracker, trackingTimeout, dataAdapter);
+        this.TrackingService.LoadData();
+
+        this.TrackingService.TrackedApplications.Add(new ApplicationData() { ProcessName = "Test", TrackedTime = TimeSpan.FromSeconds(10) });
     }
 
     public string BoldTitle => "WINDOW WATCH APP";

@@ -1,4 +1,5 @@
 ﻿using ReactiveUI;
+using System.ComponentModel;
 
 namespace WindowWatchApp.Avalonia.ViewModels;
 

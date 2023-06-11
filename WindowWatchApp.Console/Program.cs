@@ -2,6 +2,7 @@
 
 using System;
 using WindowWatchApp.Common;
+using WindowWatchApp.Common.DataAdapters;
 using WindowWatchApp.Common.Windows;
 
 public static class Program
@@ -19,7 +20,12 @@ public static class Program
 
             // If the user is inactive for more than 3 minutes, stop tracking.
             var trackingTimeout = TimeSpan.FromMinutes(3);
-            var trackingService = new TrackingService(activityTracker, trackingTimeout);
+
+            var filePath = "./test.json";
+            var dataAdapter = new FileDataAdapter(filePath);
+
+            var trackingService = new TrackingService(activityTracker, trackingTimeout, dataAdapter);
+            trackingService.LoadData();
 
             // Start tracking at 10 second intervals.
             trackingService.StartTracking(TimeSpan.FromSeconds(10));
