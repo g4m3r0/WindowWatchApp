@@ -1,18 +1,15 @@
 ﻿namespace WindowWatchApp.Common
 {
+    using Avalonia.Threading;
     using System;
-    using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using System.ComponentModel;
-    using System.Runtime.CompilerServices;
     using System.Timers;
-    using WindowWatchApp.Common;
     using WindowWatchApp.Common.Models;
 
     /// <summary>
     /// Provides a service for tracking user activity based on active application.
     /// </summary>
-    public class TrackingService : INotifyPropertyChanged
+    public class TrackingService
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="TrackingService"/> class.
@@ -54,13 +51,6 @@
         /// Gets the IActivityTracker implementation that the service uses to track activity.
         /// </summary>
         private IActivityTracker ActivityTracker { get; init; }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
 
         /// <summary>
         /// Starts tracking activity at a specified interval.
@@ -113,15 +103,16 @@
             // if the process is not in the collection, add it
             if (applicationData == null)
             {
-                this.TrackedApplications.Add(new ApplicationData { ProcessName = processName, TrackedTime = this.TrackingInterval});
+                Dispatcher.UIThread.Invoke(() =>
+                {
+                    // Code to update the UI, e.g., adding an item to the ObservableCollection
+                    this.TrackedApplications.Add(new ApplicationData { ProcessName = processName, TrackedTime = this.TrackingInterval });
+                });
             }
             else
             {
                 applicationData.TrackedTime += this.TrackingInterval;
             }
-
-            // raise property changed event
-            this.OnPropertyChanged(nameof(this.TrackedApplications));
         }
     }
 }
