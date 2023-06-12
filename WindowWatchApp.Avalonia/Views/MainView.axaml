@@ -3,6 +3,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="clr-namespace:WindowWatchApp.Avalonia.ViewModels"
+			 xmlns:i="clr-namespace:Projektanker.Icons.Avalonia;assembly=Projektanker.Icons.Avalonia"
              mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="450"
 			 Width="400" Height="450"
              x:Class="WindowWatchApp.Avalonia.Views.MainView"
@@ -29,7 +30,7 @@
 			</Grid.ColumnDefinitions>
 
 			<TextBlock Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding BoldTitle}" Margin="15" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" />
-			<Button Grid.Column="1" Margin="5" Content="S" ToolTip.Tip="Settings" Opacity="2" Command="{Binding ShowSettingsCommand}" />
+			<Button Grid.Column="1" Margin="5" i:Attached.Icon="fa-solid fa-gear" ToolTip.Tip="Settings" Opacity="2" Command="{Binding ShowSettingsCommand}" />
 		</Grid>
 
 
@@ -47,11 +48,11 @@
 				<ColumnDefinition Width="auto" />
 			</Grid.ColumnDefinitions>
 			<StackPanel Orientation="Horizontal">
-				<Button Content="Start" ToolTip.Tip="Start Tracking" Opacity="2" Command="{Binding StartTrackingCommand}" />
-				<Button Content="Stop" ToolTip.Tip="Stop Tracking" Opacity="2" Command="{Binding StopTrackingCommand}" />
+				<Button i:Attached.Icon="fa-solid fa-play" Margin="5 0 0 0" ToolTip.Tip="Start Tracking" Opacity="2" Command="{Binding StartTrackingCommand}" />
+				<Button i:Attached.Icon="fa-solid fa-stop" Margin="5 0 0 0" ToolTip.Tip="Stop Tracking" Opacity="2" Command="{Binding StopTrackingCommand}" />
 			</StackPanel>
 
-			<Button Grid.Column="1" HorizontalAlignment="Right" Content="Remove Selected" ToolTip.Tip="Remove Selected Record" Opacity="2" Command="{Binding RemoveSelectedCommand}" />
+			<Button Grid.Column="1" i:Attached.Icon="fa-solid fa-trash" HorizontalAlignment="Right" ToolTip.Tip="Remove Selected Record" Opacity="2" Command="{Binding RemoveSelectedCommand}" />
 		</Grid>
 
 	</Grid>
