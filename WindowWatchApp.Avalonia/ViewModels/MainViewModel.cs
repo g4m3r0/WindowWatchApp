@@ -22,6 +22,10 @@ public class MainViewModel : ViewModelBase
 
     private string boldTitle = DefaultTitle;
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="MainViewModel"/> class.
+    /// </summary>
+    /// <param name="activityTracker">An instance of an activity tracker implementation.</param>
     public MainViewModel(IActivityTracker activityTracker)
     {
         // If the user is inactive for more than 3 minutes, stop tracking.
@@ -66,16 +70,34 @@ public class MainViewModel : ViewModelBase
         set => this.RaiseAndSetIfChanged(ref this.boldTitle, value);
     }
 
+    /// <summary>
+    /// Gets or sets the record which is selected by the user.
+    /// </summary>
     public ApplicationData? SelectedRecord { get; set; }
 
+    /// <summary>
+    /// Gets or sets the tracking service.
+    /// </summary>
     public TrackingService TrackingService { get; set; }
 
+    /// <summary>
+    /// Gets the command to show the settings window.
+    /// </summary>
     public ReactiveCommand<Unit, Unit> ShowSettingsCommand { get; }
 
+    /// <summary>
+    /// Gets the command to start tracking the user's activity.
+    /// </summary>
     public ReactiveCommand<Unit, Unit> StartTrackingCommand { get; }
 
+     /// <summary>
+     /// Gets the command to stop tracking the user's activity.
+     /// </summary>
     public ReactiveCommand<Unit, Unit> StopTrackingCommand { get; }
 
+    /// <summary>
+    /// Gets the command to remove the selected record.
+    /// </summary>
     public ReactiveCommand<Unit, Unit> RemoveSelectedCommand { get; }
 
     /// <summary>
