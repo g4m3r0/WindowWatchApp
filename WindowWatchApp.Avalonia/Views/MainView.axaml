@@ -38,7 +38,7 @@
 
 		<Border Grid.Row="1" Background="PaleGoldenrod" />
 		<Border Grid.Row="1" Padding="10" Background="White" CornerRadius="20,20,0,0" />
-		<DataGrid Grid.Row="1" Margin="10" CornerRadius="3" AutoGenerateColumns="False" ItemsSource="{Binding TrackingService.TrackedApplications}" IsReadOnly="True" >
+		<DataGrid Grid.Row="1" Margin="10" CornerRadius="3" AutoGenerateColumns="False" ItemsSource="{Binding TrackingService.TrackedApplications}" SelectedItem="{Binding SelectedRecord}" IsReadOnly="True" >
 			<DataGrid.Columns>
 				<DataGridTextColumn Header="Application" Width="*" Binding="{Binding ProcessName}" />
 				<DataGridTextColumn Header="Time Tracked" Width="auto" Binding="{Binding TrackedTime}" />

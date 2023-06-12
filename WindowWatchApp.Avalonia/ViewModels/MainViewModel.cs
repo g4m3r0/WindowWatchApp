@@ -34,8 +34,8 @@ public class MainViewModel : ViewModelBase
         this.TrackingService.LoadData();
 
         // Setup Commands
-        this.StartTrackingCommand = ReactiveCommand.CreateFromTask(this.StartTracking);
-        this.StopTrackingCommand = ReactiveCommand.CreateFromTask(this.StopTracking);
+        this.StartTrackingCommand = ReactiveCommand.Create(this.StartTracking);
+        this.StopTrackingCommand = ReactiveCommand.Create(this.StopTracking);
         this.RemoveSelectedCommand = ReactiveCommand.Create(this.RemoveSelectedRecord);
     }
 
@@ -66,6 +66,8 @@ public class MainViewModel : ViewModelBase
         set => this.RaiseAndSetIfChanged(ref this.boldTitle, value);
     }
 
+    public ApplicationData? SelectedRecord { get; set; }
+
     public TrackingService TrackingService { get; set; }
 
     public ReactiveCommand<Unit, Unit> ShowSettingsCommand { get; }
@@ -76,23 +78,35 @@ public class MainViewModel : ViewModelBase
 
     public ReactiveCommand<Unit, Unit> RemoveSelectedCommand { get; }
 
-    public async Task StartTracking()
+    /// <summary>
+    /// Starts tracking the user's activity.
+    /// </summary>
+    public void StartTracking()
     {
         // Start tracking at 10 second intervals.
         this.TrackingService.StartTracking(TimeSpan.FromSeconds(1));
-
         this.BoldTitle = $"{DefaultTitle} (TRACKING)";
     }
 
-    public async Task StopTracking()
+    /// <summary>
+    /// Stops tracking the user's activity.
+    /// </summary>
+    public void StopTracking()
     {
         this.TrackingService.StopTracking();
         this.BoldTitle = DefaultTitle;
     }
 
+    /// <summary>
+    /// Removes the selected record from the list.
+    /// </summary>
     public void RemoveSelectedRecord()
     {
-        // TODO: Implement
+        if (this.SelectedRecord == null)
+        {
+            return;
+        }
 
+        this.TrackingService.TrackedApplications.Remove(this.SelectedRecord);
     }
 }
