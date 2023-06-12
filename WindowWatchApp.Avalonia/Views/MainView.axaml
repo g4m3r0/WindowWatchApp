@@ -13,8 +13,7 @@
          to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
 		<vm:MainViewModel />
 	</Design.DataContext>
-
-
+	
 	<Grid>
 		<Grid.RowDefinitions>
 			<RowDefinition Height="auto" />
@@ -22,19 +21,24 @@
 			<RowDefinition Height="auto" />
 		</Grid.RowDefinitions>
 
-		<Border Grid.Row="0"  Background="PaleGoldenrod" />
+		<Border Grid.Row="0" Background="PaleGoldenrod" />
 		<Grid Grid.Row="0">
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="*" />
 				<ColumnDefinition Width="auto" />
 			</Grid.ColumnDefinitions>
 
-			<TextBlock Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding BoldTitle}" Margin="15" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" />
+			<StackPanel Grid.Column="0" Grid.ColumnSpan="2" Margin="15" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal">
+				<Image Source="/Assets/logo.ico" Width="32" Height="32" />
+				<TextBlock VerticalAlignment="Center" Text="{Binding BoldTitle}" FontWeight="Bold" />
+			</StackPanel>
+
 			<Button Grid.Column="1" Margin="5" i:Attached.Icon="fa-solid fa-gear" ToolTip.Tip="Settings" Opacity="2" Command="{Binding ShowSettingsCommand}" />
 		</Grid>
 
-
-		<DataGrid Grid.Row="1" AutoGenerateColumns="False" ItemsSource="{Binding TrackingService.TrackedApplications}" IsReadOnly="True" >
+		<Border Grid.Row="1" Background="PaleGoldenrod" />
+		<Border Grid.Row="1" Padding="10" Background="White" CornerRadius="20,20,0,0" />
+		<DataGrid Grid.Row="1" Margin="10" CornerRadius="3" AutoGenerateColumns="False" ItemsSource="{Binding TrackingService.TrackedApplications}" IsReadOnly="True" >
 			<DataGrid.Columns>
 				<DataGridTextColumn Header="Application" Width="*" Binding="{Binding ProcessName}" />
 				<DataGridTextColumn Header="Time Tracked" Width="auto" Binding="{Binding TrackedTime}" />
@@ -51,9 +55,7 @@
 				<Button i:Attached.Icon="fa-solid fa-play" Margin="5 0 0 0" ToolTip.Tip="Start Tracking" Opacity="2" Command="{Binding StartTrackingCommand}" />
 				<Button i:Attached.Icon="fa-solid fa-stop" Margin="5 0 0 0" ToolTip.Tip="Stop Tracking" Opacity="2" Command="{Binding StopTrackingCommand}" />
 			</StackPanel>
-
 			<Button Grid.Column="1" i:Attached.Icon="fa-solid fa-trash" HorizontalAlignment="Right" ToolTip.Tip="Remove Selected Record" Opacity="2" Command="{Binding RemoveSelectedCommand}" />
 		</Grid>
-
 	</Grid>
 </UserControl>
