@@ -66,6 +66,7 @@ public class TrackingService
         this.TrackTimer = new Timer(this.TrackingInterval.TotalMilliseconds);
         this.TrackTimer.Elapsed += this.TrackingTimerElapsed;
         this.TrackTimer.Start();
+        this.IsActive = true;
     }
 
     /// <summary>
@@ -73,6 +74,8 @@ public class TrackingService
     /// </summary>
     public void StopTracking()
     {
+        this.IsActive = false;
+
         if (this.TrackTimer == null)
         {
             return;
