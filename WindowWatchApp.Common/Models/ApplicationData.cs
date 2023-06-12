@@ -11,21 +11,24 @@ public class ApplicationData : INotifyPropertyChanged
 
     public TimeSpan TrackedTime
     {
-        get { return trackedTime; }
+        get
+        {
+            return this.trackedTime;
+        }
 
         set
         {
-            if (trackedTime != value)
+            if (this.trackedTime != value)
             {
-                trackedTime = value;
-                OnPropertyChanged();
+                this.trackedTime = value;
+                this.OnPropertyChanged();
             }
         }
     }
 
     public event PropertyChangedEventHandler PropertyChanged;
 
-    protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+    protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
     {
         this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
