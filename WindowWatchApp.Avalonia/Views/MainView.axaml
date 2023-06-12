@@ -21,10 +21,19 @@
 			<RowDefinition Height="auto" />
 		</Grid.RowDefinitions>
 
-		<Border Grid.Row="0" Background="PaleGoldenrod" />
-		<TextBlock Grid.Row="0" Text="{Binding BoldTitle}" Margin="15" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+		<Border Grid.Row="0"  Background="PaleGoldenrod" />
+		<Grid Grid.Row="0">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="*" />
+				<ColumnDefinition Width="auto" />
+			</Grid.ColumnDefinitions>
 
-		<DataGrid Grid.Row="1" AutoGenerateColumns="False" ItemsSource="{Binding TrackingService.TrackedApplications}">
+			<TextBlock Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding BoldTitle}" Margin="15" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" />
+			<Button Grid.Column="1" Margin="5" Content="S" ToolTip.Tip="Settings" Opacity="2" Command="{Binding ShowSettingsCommand}" />
+		</Grid>
+
+
+		<DataGrid Grid.Row="1" AutoGenerateColumns="False" ItemsSource="{Binding TrackingService.TrackedApplications}" IsReadOnly="True" >
 			<DataGrid.Columns>
 				<DataGridTextColumn Header="Application" Width="*" Binding="{Binding ProcessName}" />
 				<DataGridTextColumn Header="Time Tracked" Width="auto" Binding="{Binding TrackedTime}" />
@@ -32,8 +41,18 @@
 		</DataGrid>
 
 		<Border Grid.Row="2" Background="PaleGoldenrod" />
-		<StackPanel Grid.Row="2" Orientation="Horizontal">
-			<Button Content="Start Tracking" Command="{Binding StartTrackingCommand}" />
-		</StackPanel>
+		<Grid Grid.Row="2" Margin="5">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="*" />
+				<ColumnDefinition Width="auto" />
+			</Grid.ColumnDefinitions>
+			<StackPanel Orientation="Horizontal">
+				<Button Content="Start" ToolTip.Tip="Start Tracking" Opacity="2" Command="{Binding StartTrackingCommand}" />
+				<Button Content="Stop" ToolTip.Tip="Stop Tracking" Opacity="2" Command="{Binding StopTrackingCommand}" />
+			</StackPanel>
+
+			<Button Grid.Column="1" HorizontalAlignment="Right" Content="Remove Selected" ToolTip.Tip="Remove Selected Record" Opacity="2" Command="{Binding RemoveSelectedCommand}" />
+		</Grid>
+
 	</Grid>
 </UserControl>
