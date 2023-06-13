@@ -8,4 +8,12 @@
         <FluentTheme />
 		<StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Fluent.xaml"/>
     </Application.Styles>
+
+	<Application.Resources>
+		<Color x:Key="SystemAccentColor">PaleGoldenrod</Color>
+
+		<!-- TODO: add separate light and dark mode color -->
+		<Color x:Key="SystemAccentColorLight1">PaleGoldenrod</Color>
+		<Color x:Key="SystemAccentColorDark1">PaleGoldenrod</Color>
+	</Application.Resources>
 </Application>
