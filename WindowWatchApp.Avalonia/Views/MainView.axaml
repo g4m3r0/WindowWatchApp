@@ -29,7 +29,7 @@
 			</Grid.ColumnDefinitions>
 
 			<StackPanel Grid.Column="0" Grid.ColumnSpan="2" Margin="15" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal">
-				<Image Source="/Assets/logo.ico" Width="32" Height="32" />
+				<Image Source="/Assets/logo.ico" Width="32" Height="32" Margin="0 0 10 0" />
 				<TextBlock VerticalAlignment="Center" Text="{Binding BoldTitle}" FontWeight="Bold" />
 			</StackPanel>
 
