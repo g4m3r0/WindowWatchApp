@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33723.286
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowWatchApp.Console", "WindowWatchApp.Console\WindowWatchApp.Console.csproj", "{271C3BEC-0C87-49FA-93AA-DE8590A3D90C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowWatchApp.Console", "src\WindowWatchApp.Console\WindowWatchApp.Console.csproj", "{271C3BEC-0C87-49FA-93AA-DE8590A3D90C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowWatchApp.Common", "WindowWatchApp.Common\WindowWatchApp.Common.csproj", "{3C916031-10EF-4D7B-8D9B-DC73D951E829}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowWatchApp.Common", "src\WindowWatchApp.Common\WindowWatchApp.Common.csproj", "{3C916031-10EF-4D7B-8D9B-DC73D951E829}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowWatchApp.Common.Windows", "WindowWatchApp.Common.Windows\WindowWatchApp.Common.Windows.csproj", "{541ECD6E-BB48-465A-8694-ED4D49D3F901}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowWatchApp.Common.Windows", "src\WindowWatchApp.Common.Windows\WindowWatchApp.Common.Windows.csproj", "{541ECD6E-BB48-465A-8694-ED4D49D3F901}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WindowWatchApp.Avalonia", "WindowWatchApp.Avalonia\WindowWatchApp.Avalonia.csproj", "{6EDF3FF7-8049-44F4-8ABF-1369AD2C444C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WindowWatchApp.Avalonia", "src\WindowWatchApp.Avalonia\WindowWatchApp.Avalonia.csproj", "{6EDF3FF7-8049-44F4-8ABF-1369AD2C444C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WindowWatchApp.Avalonia.Desktop", "WindowWatchApp.Avalonia.Desktop\WindowWatchApp.Avalonia.Desktop.csproj", "{70E1E399-ACE9-4670-9B11-775FA487ED1D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WindowWatchApp.Avalonia.Desktop", "src\WindowWatchApp.Avalonia.Desktop\WindowWatchApp.Avalonia.Desktop.csproj", "{70E1E399-ACE9-4670-9B11-775FA487ED1D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
